@@ -1,6 +1,6 @@
 import pytest
 
-from main import NotGate, AndGate, OrGate
+from basic_gates import NotGate, AndGate, OrGate
 
 
 @pytest.mark.parametrize(

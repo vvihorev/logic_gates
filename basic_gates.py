@@ -7,6 +7,23 @@ class LogicGate:
         return self.output
 
 
+class BinaryGate(LogicGate):
+    def __init__(self) -> None:
+        super().__init__()
+        self.pin_a = None
+        self.pin_b = None
+
+    def set_input(self, value):
+        if self.pin_a is None:
+            self.pin_a = value
+        elif self.pin_b is None:
+            self.pin_b = value
+
+    def validate_input(self):
+        if self.pin_a is None or self.pin_b is None:
+            raise ValueError('Input is None')
+
+
 class NotGate(LogicGate):
     def __init__(self) -> None:
         super().__init__()
@@ -24,23 +41,6 @@ class NotGate(LogicGate):
 
     def validate_input(self):
         if self.pin is None:
-            raise ValueError('Input is None')
-
-
-class BinaryGate(LogicGate):
-    def __init__(self) -> None:
-        super().__init__()
-        self.pin_a = None
-        self.pin_b = None
-
-    def set_input(self, value):
-        if self.pin_a is None:
-            self.pin_a = value
-        elif self.pin_b is None:
-            self.pin_b = value
-
-    def validate_input(self):
-        if self.pin_a is None or self.pin_b is None:
             raise ValueError('Input is None')
 
 
