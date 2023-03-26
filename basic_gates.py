@@ -34,7 +34,7 @@ class NotGate(LogicGate):
 
     def perform_logic(self):
         self.validate_input()
-        if self.pin == 1:
+        if self.pin() == 1:
             self.output = 0
         else:
             self.output = 1
@@ -47,18 +47,23 @@ class NotGate(LogicGate):
 class AndGate(BinaryGate):
     def perform_logic(self):
         self.validate_input()
-        self.output = self.pin_a & self.pin_b
+        self.output = self.pin_a() & self.pin_b()
 
 
 class OrGate(BinaryGate):
     def perform_logic(self):
         self.validate_input()
-        self.output = self.pin_a | self.pin_b
+        self.output = self.pin_a() | self.pin_b()
 
 
 class Connector:
     def __init__(self, from_gate, to_gate) -> None:
-        self.from_gate = from_gate
-        self.to_gate = to_gate
-        self.to_gate.set_input(self.from_gate.get_output())
+        to_gate.set_input(from_gate.get_output)
 
+
+class Source:
+    def __init__(self, value) -> None:
+        self.value = value
+    
+    def get_output(self):
+        return self.value
