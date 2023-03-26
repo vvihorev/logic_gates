@@ -1,6 +1,6 @@
 import pytest
 
-from main import NotGate, AndGate
+from main import NotGate, AndGate, OrGate
 
 
 @pytest.mark.parametrize(
@@ -30,3 +30,19 @@ def test_andgate(pin_a, pin_b, output):
     ag.set_input(pin_a)
     ag.set_input(pin_b)
     assert ag.get_output() == output
+
+
+@pytest.mark.parametrize(
+    'pin_a,pin_b,output',
+    (
+        (0, 0, 0),
+        (0, 1, 1),
+        (1, 0, 1),
+        (1, 1, 1),
+    )
+)
+def test_orgate(pin_a, pin_b, output):
+    og = OrGate()
+    og.set_input(pin_a)
+    og.set_input(pin_b)
+    assert og.get_output() == output
