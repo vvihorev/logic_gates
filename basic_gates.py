@@ -54,3 +54,11 @@ class OrGate(BinaryGate):
     def perform_logic(self):
         self.validate_input()
         self.output = self.pin_a | self.pin_b
+
+
+class Connector:
+    def __init__(self, from_gate, to_gate) -> None:
+        self.from_gate = from_gate
+        self.to_gate = to_gate
+        self.to_gate.set_input(self.from_gate.get_output())
+

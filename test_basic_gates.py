@@ -1,6 +1,6 @@
 import pytest
 
-from basic_gates import NotGate, AndGate, OrGate
+from basic_gates import NotGate, AndGate, OrGate, Connector
 
 
 @pytest.mark.parametrize(
@@ -46,3 +46,21 @@ def test_orgate(pin_a, pin_b, output):
     og.set_input(pin_a)
     og.set_input(pin_b)
     assert og.get_output() == output
+
+
+@pytest.mark.parametrize(
+    'pin_a,pin_b,output',
+    (
+        (0, 0, 1),
+        (0, 1, 1),
+        (1, 0, 1),
+        (1, 1, 0),
+    )
+)
+def test_connector(pin_a, pin_b, output):
+    ag = AndGate()
+    ag.set_input(pin_a)
+    ag.set_input(pin_b)
+    ng = NotGate()
+    Connector(ag, ng)
+    assert ng.get_output() == output
