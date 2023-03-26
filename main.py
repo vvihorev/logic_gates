@@ -1,12 +1,17 @@
-class NotGate:
+class LogicGate:
     def __init__(self) -> None:
         self.output = None
-        self.pin = None
-    
+
     def get_output(self):
         self.perform_logic()
         return self.output
 
+
+class NotGate(LogicGate):
+    def __init__(self) -> None:
+        super().__init__()
+        self.pin = None
+    
     def set_input(self, value):
         self.pin = value
 
@@ -22,16 +27,12 @@ class NotGate:
             raise ValueError('Input is None')
 
 
-class AndGate:
+class AndGate(LogicGate):
     def __init__(self) -> None:
-        self.output = None
+        super().__init__()
         self.pin_a = None
         self.pin_b = None
     
-    def get_output(self):
-        self.perform_logic()
-        return self.output
-
     def set_input(self, value):
         if self.pin_a is None:
             self.pin_a = value
